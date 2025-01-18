@@ -12,7 +12,6 @@ def main():
         clock = pygame.time.Clock()
         dt = 0
         
-
         print("Starting asteroids!")
 
         updatable = pygame.sprite.Group()

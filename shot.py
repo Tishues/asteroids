@@ -1,11 +1,11 @@
 import pygame
 from circleshape import CircleShape
-from constants import SHOT_RADIUS, PLAYER_SHOOT_SPEED
+from constants import SHOT_RADIUS
 
 class Shot(CircleShape):
     def __init__(self, position):
-        pygame.sprite.Sprite.__init__(self, self.containers)
         super().__init__(position[0], position[1], SHOT_RADIUS)
+        pygame.sprite.Sprite.__init__(self, self.containers)
         self.velocity = pygame.math.Vector2(0, 0)
         
     def draw(self, screen):

@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroidfield import AsteroidField
@@ -31,6 +32,10 @@ def main():
                         return
                 for sprite in updatable:
                     sprite.update(dt)  # Call `update` on everything in the updatable group
+                for asteroid in asteroids:
+                     if player.collisions(asteroid):
+                          print("Game over!")
+                          sys.exit()
                 pygame.Surface.fill(screen, (0,0,0))
                 for sprite in drawable:
                     sprite.draw(screen)  # Use YOUR `draw()` method for all drawable objects

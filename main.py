@@ -7,7 +7,7 @@ from asteroid import Asteroid
 from shot import Shot
 
 def main():
-        pygame.init
+        pygame.init()
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         clock = pygame.time.Clock()
         dt = 0
@@ -36,10 +36,14 @@ def main():
                 for sprite in updatable:
                     sprite.update(dt)  # Call `update` on everything in the updatable group
 
-                for asteroid in asteroids:
-                     if player.collisions(asteroid):
-                          print("Game over!")
-                          sys.exit()
+                for asteroid in asteroids.copy():
+                    if player.collisions(asteroid):
+                        print("Game over!")
+                        sys.exit()
+                    for shot in shots.copy():
+                        if asteroid.collisions(shot) or shot.collisions(asteroid):
+                            asteroid.kill()
+                            shot.kill()
 
                 pygame.Surface.fill(screen, (0,0,0))
 

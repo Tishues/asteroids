@@ -32,20 +32,22 @@ def main():
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         return
+                    
                 for sprite in updatable:
                     sprite.update(dt)  # Call `update` on everything in the updatable group
+
                 for asteroid in asteroids:
                      if player.collisions(asteroid):
                           print("Game over!")
                           sys.exit()
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_SPACE]:
-                    new_shot = player.shoot()
-                    shots.add(new_shot)
+
                 pygame.Surface.fill(screen, (0,0,0))
+
                 for sprite in drawable:
                     sprite.draw(screen)  # Use YOUR `draw()` method for all drawable objects
+
                 pygame.display.flip()
+
                 dt = clock.tick(60) / 1000
               
 

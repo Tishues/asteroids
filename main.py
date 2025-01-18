@@ -42,7 +42,7 @@ def main():
                         sys.exit()
                     for shot in shots.copy():
                         if asteroid.collisions(shot) or shot.collisions(asteroid):
-                            asteroid.kill()
+                            asteroid.split()
                             shot.kill()
 
                 pygame.Surface.fill(screen, (0,0,0))

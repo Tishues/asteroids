@@ -18,6 +18,7 @@ def main():
         drawable = pygame.sprite.Group()
         asteroids = pygame.sprite.Group()
         shots = pygame.sprite.Group()
+        total_score = 0
     
         Player.containers = (updatable, drawable)
         Asteroid.containers = (updatable, drawable, asteroids)
@@ -37,12 +38,13 @@ def main():
 
                 for asteroid in asteroids.copy():
                     if player.collisions(asteroid):
-                        print("Game over!")
+                        print(f"Game over! Your total score was: {total_score}")
                         sys.exit()
                     for shot in shots.copy():
                         if asteroid.collisions(shot) or shot.collisions(asteroid):
                             asteroid.split()
                             shot.kill()
+                            total_score += 1
 
                 pygame.Surface.fill(screen, (0,0,0))
 

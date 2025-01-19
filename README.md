@@ -9,13 +9,13 @@ A python implementation of the classic Asteroids arcade game where the player pi
 1. Clone this repository or download the source code.
 2. Install Python 3.8 or higher.
 3. Install Pygame:
-```python
-pip install pygame   # Windows/Mac
-# OR
-sudo apt install python3-pygame #Linux/WSL
+    ```python
+    pip install pygame   # Windows/Mac  
+    # OR
+    sudo apt install python3-pygame # Linux/WSL
 
 ## Running the Game
-python3 main.py
+    python3 main.py
 
 ## Controls
 - W: Thrust forward

@@ -11,14 +11,14 @@ def main():
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         clock = pygame.time.Clock()
         dt = 0
-        
+        total_score = 0
+
         print("Starting asteroids!")
 
         updatable = pygame.sprite.Group()
         drawable = pygame.sprite.Group()
         asteroids = pygame.sprite.Group()
         shots = pygame.sprite.Group()
-        total_score = 0
     
         Player.containers = (updatable, drawable)
         Asteroid.containers = (updatable, drawable, asteroids)
@@ -34,11 +34,11 @@ def main():
                         return
                     
                 for sprite in updatable:
-                    sprite.update(dt)  # Call `update` on everything in the updatable group
+                    sprite.update(dt)  # Calls `update` on everything in the updatable group
 
                 for asteroid in asteroids.copy():
                     if player.collisions(asteroid):
-                        print(f"Game over! Your total score was: {total_score}")
+                        print(f"Game over! Your score was: {total_score}")
                         sys.exit()
                     for shot in shots.copy():
                         if asteroid.collisions(shot) or shot.collisions(asteroid):
@@ -49,7 +49,7 @@ def main():
                 pygame.Surface.fill(screen, (0,0,0))
 
                 for sprite in drawable:
-                    sprite.draw(screen)  # Use YOUR `draw()` method for all drawable objects
+                    sprite.draw(screen)  # Uses `draw()` method for all drawable objects
 
                 pygame.display.flip()
 

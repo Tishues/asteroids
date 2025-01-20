@@ -1,10 +1,11 @@
 import pygame
-import sys
+from tkinter import Label, Button
 from constants import *
 from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from shot import Shot
+from functions import *
 
 def main():
         pygame.init()
@@ -38,8 +39,12 @@ def main():
 
                 for asteroid in asteroids.copy():
                     if player.collisions(asteroid):
-                        print(f"Game over! Your score was: {total_score}")
-                        sys.exit()
+                        print(f"Game ended. Your score was: {total_score}")
+                        Label(window, text=f"Score: {total_score}").pack()
+                        Button(window, text="RESTART", command=restart_program).pack()
+                        Button(window, text="QUIT", command=exit).pack()
+                        window.protocol("WM_DELETE_WINDOW", on_closing)
+                        window.mainloop()
                     for shot in shots.copy():
                         if asteroid.collisions(shot) or shot.collisions(asteroid):
                             asteroid.split()

@@ -1,4 +1,5 @@
 import pygame
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -14,7 +15,7 @@ class CircleShape(pygame.sprite.Sprite):
         pass
 
     def update(self, dt):
-        pass
+        pass        
         # sub-classes must override
         
 

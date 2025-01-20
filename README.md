@@ -1,5 +1,5 @@
 # Asteroids game
-A python implementation of the classic Asteroids arcade game where the player pilots a shaceship and destroys asteroids.
+A python implementation of the classic Asteroids arcade game where the player pilots a spaceship and destroys asteroids.
 
 ## Prerequisites
 - Python 3.x
@@ -14,7 +14,7 @@ A python implementation of the classic Asteroids arcade game where the player pi
     # OR
     sudo apt install python3-pygame # Linux/WSL
 
-## Running the Game
+## Running the Game 
     python3 main.py
 
 ## Controls

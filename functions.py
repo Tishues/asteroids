@@ -4,8 +4,6 @@ import pygame
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 pygame.init()
-WINDOW_HEIGHT = 400
-WINDOW_WIDTH = 600
 window = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 bigfont = pygame.font.Font(None, 80)
 smallfont = pygame.font.Font(None, 45)
@@ -15,7 +13,6 @@ def restart_program():
     os.execv(python, [python] + sys.argv)
 
 def play_again():
-    mouse = pygame.mouse.get_pos()
     text = bigfont.render('Play again?', 13, (0, 0, 0))
     textx = SCREEN_WIDTH / 2 - text.get_width() / 2
     texty = SCREEN_HEIGHT / 2 - text.get_height() / 2
@@ -24,7 +21,8 @@ def play_again():
     pygame.draw.rect(window, (255, 255, 255), ((textx - 5, texty - 5),
                                                 (textx_size + 10, texty_size +
                                                 10)))
-    #highlight box if mouseover. NOT WORKING
+    #highlight button if mouseover. NOT WORKING
+    #mouse = pygame.mouse.get_pos()
     #if SCREEN_WIDTH/2 <= mouse[0] <= SCREEN_WIDTH/2 and SCREEN_HEIGHT/2 <= mouse[1] <= SCREEN_HEIGHT/2:
     #    pygame.draw.rect(window, (0, 0, 0), ((textx - 5, texty - 5),
     #                                                (textx_size + 10, texty_size +

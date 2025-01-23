@@ -33,13 +33,17 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
-                    
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        exit()
+
             for sprite in updatable:
                 sprite.update(dt)  # Calls `update` on everything in the updatable group
 
             for asteroid in asteroids.copy():
                 # Game Over, Score and Restart 
                 if player.collisions(asteroid):
+                    #total score end screen
                     text = smallfont.render(f"Score: {total_score}", 13, (0, 0, 0))
                     textx = SCREEN_WIDTH / 2 - text.get_width() / 2
                     texty = SCREEN_HEIGHT / 3 - text.get_height() / 2
@@ -51,7 +55,20 @@ def main():
 
                     screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
                                         SCREEN_HEIGHT / 3 - text.get_height() / 2))
+                    # y/n end screen
+                    text = smallfont.render('Y/N', 13, (0, 0, 0))
+                    textx = SCREEN_WIDTH / 2 - text.get_width() / 2
+                    texty = SCREEN_HEIGHT / 1.65 - text.get_height() / 2
+                    textx_size = text.get_width()
+                    texty_size = text.get_height()
+                    pygame.draw.rect(screen, (255, 255, 255), ((textx - 5, texty - 5),
+                                                                (textx_size + 10, texty_size +
+                                                                10)))
+
+                    screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
+                                        SCREEN_HEIGHT / 1.65 - text.get_height() / 2))
                     play_again()
+                    
                     
                 for shot in shots.copy():
                     if asteroid.collisions(shot) or shot.collisions(asteroid):

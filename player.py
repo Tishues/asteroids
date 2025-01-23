@@ -9,8 +9,6 @@ class Player(CircleShape):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.rotation =  0
         self.shoot_timer = 0
-        self.x = x
-        self.y = y
         
 
     def triangle(self):
@@ -51,8 +49,8 @@ class Player(CircleShape):
             self.rotate(dt)
         if keys[pygame.K_w]:
             self.move(dt)
-        if keys[pygame.K_s]:
-            self.move(-dt)
+        #if keys[pygame.K_s]:
+            #self.move(-dt)
         if keys[pygame.K_SPACE]:
             self.shoot()
 

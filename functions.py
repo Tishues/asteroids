@@ -43,3 +43,14 @@ def play_again():
                     if y >= texty - 5 and y <= texty + texty_size + 5:
                         in_main_menu = False
                         restart_program()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_y:
+                    restart_program()
+                if event.key == pygame.K_SPACE:
+                    restart_program()
+                if event.key == pygame.K_RETURN:
+                    restart_program()
+                if event.key == pygame.K_n:
+                    sys.exit()
+                if event.key == pygame.K_ESCAPE:
+                    sys.exit()

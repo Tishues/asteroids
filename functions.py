@@ -12,6 +12,7 @@ def restart_program():
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
+        # Button to restart the program on end screen
 def play_again():
     text = bigfont.render('Play again?', 13, (0, 0, 0))
     textx = SCREEN_WIDTH / 2 - text.get_width() / 2
@@ -21,16 +22,6 @@ def play_again():
     pygame.draw.rect(window, (255, 255, 255), ((textx - 5, texty - 5),
                                                 (textx_size + 10, texty_size +
                                                 10)))
-    #highlight button if mouseover. NOT WORKING
-    #mouse = pygame.mouse.get_pos()
-    #if SCREEN_WIDTH/2 <= mouse[0] <= SCREEN_WIDTH/2 and SCREEN_HEIGHT/2 <= mouse[1] <= SCREEN_HEIGHT/2:
-    #    pygame.draw.rect(window, (0, 0, 0), ((textx - 5, texty - 5),
-    #                                                (textx_size + 10, texty_size +
-    #                                                10)))
-    #else:
-    #    pygame.draw.rect(window, (255, 255, 255), ((textx - 5, texty - 5),
-    #                                                (textx_size + 10, texty_size +
-    #                                                10)))
 
     window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
                         SCREEN_HEIGHT / 2 - text.get_height() / 2))

@@ -1,8 +1,8 @@
-import pygame
-pygame.init()
-display_info = pygame.display.Info()
-SCREEN_WIDTH = display_info.current_w - 15
-SCREEN_HEIGHT = display_info.current_h - 100
+#import pygame
+#pygame.init()
+#display_info = pygame.display.Info()
+SCREEN_WIDTH = 900
+SCREEN_HEIGHT = 600
 
 ASTEROID_MIN_RADIUS = 20
 ASTEROID_KINDS = 3

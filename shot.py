@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape
-from constants import SHOT_RADIUS
+from constants import SHOT_RADIUS, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Shot(CircleShape):
     def __init__(self, position):
@@ -13,3 +13,13 @@ class Shot(CircleShape):
 
     def update(self, dt):
         self.position += (self.velocity * dt)
+
+        # Destroy bullets as they exit the screen
+        if self.position.x < 0:
+            Shot.kill(self)
+        if self.position.x > SCREEN_WIDTH:
+            Shot.kill(self)
+        if self.position.y < 0:
+            Shot.kill(self)
+        if self.position.y > SCREEN_HEIGHT:
+            Shot.kill(self)

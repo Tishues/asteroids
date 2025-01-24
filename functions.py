@@ -15,9 +15,11 @@ def restart_program():
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
-    #Menu function with button to restart the program on game-over.
-def play_again():
-    text = bigfont.render('Play again?', 13, (0, 0, 0))
+    #Menu for gameover with restart/quit options.
+def gameover_menu():
+    game_over()
+    yes_or_no()
+    text = smallfont.render('Restart game?', 13, (0, 0, 0))
     textx = SCREEN_WIDTH / 2 - text.get_width() / 2
     texty = SCREEN_HEIGHT / 2 - text.get_height() / 2
     textx_size = text.get_width()
@@ -56,7 +58,7 @@ def play_again():
                     sys.exit()
 
 def yes_or_no(): #Y/n end screen label.
-    text = smallfont.render('(y)Yes / (n)No', 13, (0, 0, 0))
+    text = smallfont.render('Yes(y) / (n)No', 13, (0, 0, 0))
     textx = SCREEN_WIDTH / 2 - text.get_width() / 2
     texty = SCREEN_HEIGHT / 1.65 - text.get_height() / 2
     textx_size = text.get_width()
@@ -66,3 +68,10 @@ def yes_or_no(): #Y/n end screen label.
                                                 10)))
     window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
                         SCREEN_HEIGHT / 1.65 - text.get_height() / 2))
+    
+
+def game_over(): #Displays 'game over' title on end screen.
+        text = bigfont.render(f"GAME OVER", 13, (255, 255, 255))
+        window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2, 50))
+
+

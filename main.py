@@ -6,7 +6,7 @@ from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from shot import Shot
-from functions import smallfont, play_again, yes_or_no
+from functions import smallfont, gameover_menu
 
 def main():
     pygame.init() #Pygame Initialized.
@@ -16,6 +16,48 @@ def main():
     dt = 0
     total_score = 0 #Total score tallying all asteroids shot.
     background = pygame.image.load("images/asteroids_background.jpg") #Background image.
+
+        #Pause menu with conintue/restart/quit options.
+    def pause_menu():
+        text = smallfont.render('Paused', 13, (0, 0, 0))
+        textx = SCREEN_WIDTH / 2 - text.get_width() / 2
+        texty = SCREEN_HEIGHT / 2 - text.get_height() / 2
+        textx_size = text.get_width()
+        texty_size = text.get_height()
+        pygame.draw.rect(screen, (255, 255, 255), ((textx - 5, texty - 5),
+                                                (textx_size + 10, texty_size +
+                                                10)))
+        screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
+                        SCREEN_HEIGHT / 2 - text.get_height() / 2))
+
+        pygame.display.flip()
+        #Gameover menu.
+        in_main_menu = True
+        while in_main_menu:
+            clock.tick(0)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    in_main_menu = False
+                    pygame.display.quit()
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    x, y = event.pos
+                    if x >= textx - 5 and x <= textx + textx_size + 5:
+                        if y >= texty - 5 and y <= texty + texty_size + 5:
+                            in_main_menu = False
+                            break
+                elif event.type == pygame.KEYDOWN: #Keys to interact with menu.
+                    if event.key == pygame.K_y:  #Press Y or Enter to restart.
+                        in_main_menu = False
+                        break
+                    if event.key == pygame.K_RETURN:
+                        exit()
+                    if event.key == pygame.K_n: #Press N or ESC to quit game.
+                        exit()
+                    if event.key == pygame.K_ESCAPE:
+                        exit()
+
 
     #Sprite groups.
     updatable = pygame.sprite.Group()
@@ -31,27 +73,10 @@ def main():
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
 
-
-    def final_score(): #Final score for the end game screen.
-        text = smallfont.render(f"Score: {total_score}", 13, (0, 0, 0))
-        textx = SCREEN_WIDTH / 2 - text.get_width() / 2
-        texty = SCREEN_HEIGHT / 3 - text.get_height() / 2
-        textx_size = text.get_width()
-        texty_size = text.get_height()
-        pygame.draw.rect(screen, (255, 255, 255), ((textx - 5, texty - 5),
-                                                    (textx_size + 10, texty_size +
-                                                    10)))
-        screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
-                            SCREEN_HEIGHT / 3 - text.get_height() / 2))
         
     def current_score(): #Score to be displayed on screen while playing.
         text = smallfont.render(f"Score: {total_score}", 13, (255, 255, 255))
         screen.blit(text, (10, SCREEN_HEIGHT - 35))
-
-    def game_over():
-        final_score() #Total score end screen.
-        yes_or_no() #Y/n prompt.
-        play_again() #GAMEOVER menu screen. Player can exit the game or restart the program.
 
 
     #GAMELOOP
@@ -61,7 +86,9 @@ def main():
                     return
                 elif event.type == pygame.KEYDOWN: #Press ESC to quit program quickly.
                     if event.key == pygame.K_ESCAPE:
-                        exit()
+                        pause_menu()
+                    if event.key == pygame.K_p:
+                        pause_menu()
                     if event.key == pygame.K_SPACE:
                         player.shoot()
 
@@ -73,7 +100,7 @@ def main():
             for asteroid in asteroids.copy():
                 # Game Over, Score and Restart.
                 if player.collisions(asteroid):
-                   game_over()   
+                   gameover_menu()   
                   
                 for shot in shots.copy(): #Splits asteroids into smaller asteroids and deletes the shot.
                     if asteroid.collisions(shot) or shot.collisions(asteroid):

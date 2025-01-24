@@ -46,9 +46,7 @@ def play_again():
                         in_main_menu = False
                         restart_program()
             elif event.type == pygame.KEYDOWN: #Keys to interact with menu.
-                if event.key == pygame.K_y:  #Press Y, Space or Enter to restart.
-                    restart_program()
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_y:  #Press Y or Enter to restart.
                     restart_program()
                 if event.key == pygame.K_RETURN:
                     restart_program()

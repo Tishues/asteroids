@@ -12,6 +12,7 @@ from functions import smallfont, play_again
 def main():
     pygame.init() #Pygame Initialized.
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #Setting the game window.
+    pygame.display.set_caption("Asteroids") #Renaming the window title.
     clock = pygame.time.Clock() #A clock for tickrate and timing.
     dt = 0
     total_score = 0 #Total score tallying all asteroids shot.
@@ -39,6 +40,8 @@ def main():
                 elif event.type == pygame.KEYDOWN: #Press ESC to quit program quickly.
                     if event.key == pygame.K_ESCAPE:
                         exit()
+                    if event.key == pygame.K_SPACE:
+                        player.shoot()
 
 
             for sprite in updatable:
@@ -70,7 +73,7 @@ def main():
                                                                 10)))
                     screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
                                         SCREEN_HEIGHT / 1.65 - text.get_height() / 2))
-                    play_again() #Ends program and restarts a new one if player accepts.    
+                    play_again() #GAMEOVER menu screen. Player can exit the game or restart the program.    
                   
                 for shot in shots.copy(): #Splits asteroids into smaller asteroids and deletes the shot.
                     if asteroid.collisions(shot) or shot.collisions(asteroid):

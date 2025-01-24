@@ -55,8 +55,6 @@ class Player(CircleShape):
             self.move(dt)
         #if keys[pygame.K_s]: #Removed reverse to make game more challenging.
             #self.move(-dt) #Delete # from the start of the lines to add it back.
-        if keys[pygame.K_SPACE]:
-            self.shoot()
 
         # Wrap around world for the player only.
         if self.position.x < 0:

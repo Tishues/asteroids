@@ -14,7 +14,7 @@ class Shot(CircleShape):
     def update(self, dt):
         self.position += (self.velocity * dt)
 
-        # Destroy bullets as they exit the screen
+        #Destroys bullets as they exit the screen.
         if self.position.x < 0:
             Shot.kill(self)
         if self.position.x > SCREEN_WIDTH:

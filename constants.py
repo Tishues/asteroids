@@ -1,6 +1,3 @@
-#import pygame
-#pygame.init()
-#display_info = pygame.display.Info()
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
 

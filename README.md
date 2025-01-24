@@ -22,6 +22,5 @@ A python implementation of the classic Asteroids arcade game where the player pi
 ## Controls
 - W: Thrust forward
 - A: Rotate left
-- S: Thrust backward
 - D: Rotate right
-- SPACE: Fire bullets
+- SPACE: Fire

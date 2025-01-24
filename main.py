@@ -6,7 +6,7 @@ from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from shot import Shot
-from functions import smallfont, gameover_menu
+from functions import smallfont, gameover_menu, pause_menu_labels, p_for_pause
 
 def main():
     pygame.init() #Pygame Initialized.
@@ -17,21 +17,21 @@ def main():
     total_score = 0 #Total score tallying all asteroids shot.
     background = pygame.image.load("images/asteroids_background.jpg") #Background image.
 
-        #Pause menu with conintue/restart/quit options.
-    def pause_menu():
+        
+    def pause_menu(): #Pause menu with conintue/restart/quit options.
+        pause_menu_labels() #calling labels from functions.py
         text = smallfont.render('Paused', 13, (0, 0, 0))
         textx = SCREEN_WIDTH / 2 - text.get_width() / 2
-        texty = SCREEN_HEIGHT / 2 - text.get_height() / 2
+        texty = 50
         textx_size = text.get_width()
         texty_size = text.get_height()
         pygame.draw.rect(screen, (255, 255, 255), ((textx - 5, texty - 5),
                                                 (textx_size + 10, texty_size +
                                                 10)))
-        screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
-                        SCREEN_HEIGHT / 2 - text.get_height() / 2))
+        screen.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2, 50))
 
         pygame.display.flip()
-        #Gameover menu.
+        #PAUSE SCREEN MENU.
         in_main_menu = True
         while in_main_menu:
             clock.tick(0)
@@ -52,11 +52,16 @@ def main():
                         in_main_menu = False
                         break
                     if event.key == pygame.K_RETURN:
-                        exit()
-                    if event.key == pygame.K_n: #Press N or ESC to quit game.
+                        in_main_menu = False
+                        break
+                    if event.key == pygame.K_n: #Press N to quit game.
                         exit()
                     if event.key == pygame.K_ESCAPE:
-                        exit()
+                        in_main_menu = False
+                        break
+                    if event.key == pygame.K_p:
+                        in_main_menu = False
+                        break
 
 
     #Sprite groups.
@@ -112,6 +117,7 @@ def main():
             pygame.Surface.fill(screen, (0,0,0))
             screen.blit(background, (0, 0)) #Background image applied.
             current_score() #Displays score on screen while playing.
+            p_for_pause() #Displays controls for pause menu.
 
             for sprite in drawable:
                 sprite.draw(screen)  #Drawing ALL drawable objects.

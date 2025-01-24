@@ -9,6 +9,7 @@ window = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT)) #Sets a screen wi
 clock = pygame.time.Clock() #A clock for menu/restart function.
 bigfont = pygame.font.Font(None, 80) #A large font.
 smallfont = pygame.font.Font(None, 45) #A smaller font.
+smallestfont = pygame.font.Font(None, 30) #Smallest font.
 
     #Exits the program and starts a new one.
 def restart_program():
@@ -58,20 +59,30 @@ def gameover_menu():
                     sys.exit()
 
 def yes_or_no(): #Y/n end screen label.
-    text = smallfont.render('Yes(y) / (n)No', 13, (0, 0, 0))
-    textx = SCREEN_WIDTH / 2 - text.get_width() / 2
-    texty = SCREEN_HEIGHT / 1.65 - text.get_height() / 2
-    textx_size = text.get_width()
-    texty_size = text.get_height()
-    pygame.draw.rect(window, (255, 255, 255), ((textx - 5, texty - 5),
-                                                (textx_size + 10, texty_size +
-                                                10)))
+    text = smallfont.render('Yes(y) / No(n)', 13, (255, 255, 255))
     window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
-                        SCREEN_HEIGHT / 1.65 - text.get_height() / 2))
+                        (SCREEN_HEIGHT / 1.65 - text.get_height() / 2)-20))
     
 
 def game_over(): #Displays 'game over' title on end screen.
         text = bigfont.render(f"GAME OVER", 13, (255, 255, 255))
         window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2, 50))
 
+def pause_menu_labels():  #Lables for pause screen.    
+    def yes_y():
+        text = smallfont.render(f"Yes (y)", 13, (255, 255, 255))
+        window.blit(text, ((SCREEN_WIDTH / 2 - text.get_width()) - 100 / 2, 545))
+    def no_n():
+        text = smallfont.render(f"No (n)", 13, (255, 255, 255))
+        window.blit(text, ((SCREEN_WIDTH / 2 - text.get_width()) + 300 / 2, 545))
+    def carry_on():
+        text = bigfont.render(f"Continue?", 13, (255, 255, 255))
+        window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2, 475))
+    carry_on()
+    no_n()
+    yes_y()
 
+
+def p_for_pause(): #Display controls for pause menu on screen.
+        text = smallestfont.render(f"Pause = P", 13, (255, 255, 255))
+        window.blit(text, (SCREEN_WIDTH - 100, SCREEN_HEIGHT - 20))

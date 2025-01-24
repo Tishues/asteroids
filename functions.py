@@ -54,3 +54,15 @@ def play_again():
                     sys.exit()
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
+
+def yes_or_no(): #Y/n end screen label.
+    text = smallfont.render('(y)Yes / (n)No', 13, (0, 0, 0))
+    textx = SCREEN_WIDTH / 2 - text.get_width() / 2
+    texty = SCREEN_HEIGHT / 1.65 - text.get_height() / 2
+    textx_size = text.get_width()
+    texty_size = text.get_height()
+    pygame.draw.rect(window, (255, 255, 255), ((textx - 5, texty - 5),
+                                                (textx_size + 10, texty_size +
+                                                10)))
+    window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
+                        SCREEN_HEIGHT / 1.65 - text.get_height() / 2))

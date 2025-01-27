@@ -1,22 +1,22 @@
-#Add functions here to be used in main.py to keep it clean and easy to read.
+# Add functions here to be used in main.py to keep it clean and easy to read
 import os
 import sys
 import pygame
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
-pygame.init() #Pygame initialized for menu/restart function.
-window = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT)) #Sets a screen window for the menu/restart function.
-clock = pygame.time.Clock() #A clock for menu/restart function.
-bigfont = pygame.font.Font(None, 80) #A large font.
-smallfont = pygame.font.Font(None, 45) #A smaller font.
-smallestfont = pygame.font.Font(None, 30) #Smallest font.
+pygame.init() # Pygame initialized for menu/restart function
+window = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT)) # Sets a screen window for the menu/restart function
+clock = pygame.time.Clock() # A clock for menu/restart function
+bigfont = pygame.font.Font(None, 80) # A large font
+smallfont = pygame.font.Font(None, 45) # A smaller font
+smallestfont = pygame.font.Font(None, 30) # Smallest font
 
-    #Exits the program and starts a new one.
+    # Exits the program and starts a new one
 def restart_program():
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
-    #Menu for gameover with restart/quit options.
+    # Menu for gameover with restart/quit options
 def gameover_menu():
     game_over()
     yes_or_no()
@@ -32,7 +32,7 @@ def gameover_menu():
                         SCREEN_HEIGHT / 2 - text.get_height() / 2))
 
     pygame.display.flip()
-    #Gameover menu.
+    # Gameover menu
     in_main_menu = True
     while in_main_menu:
         clock.tick(50)
@@ -48,27 +48,27 @@ def gameover_menu():
                     if y >= texty - 5 and y <= texty + texty_size + 5:
                         in_main_menu = False
                         restart_program()
-            elif event.type == pygame.KEYDOWN: #Keys to interact with menu.
-                if event.key == pygame.K_y:  #Press Y or Enter to restart.
+            elif event.type == pygame.KEYDOWN: # Keys to interact with menu
+                if event.key == pygame.K_y:  # Press Y or Enter to restart
                     restart_program()
                 if event.key == pygame.K_RETURN:
                     restart_program()
-                if event.key == pygame.K_n: #Press N or ESC to quit game.
+                if event.key == pygame.K_n: # Press N or ESC to quit game
                     sys.exit()
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
 
-def yes_or_no(): #Y/n end screen label.
+def yes_or_no(): # Y/N end screen label
     text = smallfont.render('Yes(y) / No(n)', 13, (255, 255, 255))
     window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2,
                         (SCREEN_HEIGHT / 1.65 - text.get_height() / 2)-20))
     
 
-def game_over(): #Displays 'game over' title on end screen.
+def game_over(): # Displays 'game over' title on end screen
         text = bigfont.render(f"GAME OVER", 13, (255, 255, 255))
         window.blit(text, (SCREEN_WIDTH / 2 - text.get_width() / 2, 50))
 
-def pause_menu_labels():  #Lables for pause screen.    
+def pause_menu_labels():  # Lables for pause screen
     def yes_y():
         text = smallfont.render(f"Yes (y)", 13, (255, 255, 255))
         window.blit(text, ((SCREEN_WIDTH / 2 - text.get_width()) - 100 / 2, 545))
@@ -83,6 +83,23 @@ def pause_menu_labels():  #Lables for pause screen.
     yes_y()
 
 
-def p_for_pause(): #Display controls for pause menu on screen.
-        text = smallestfont.render(f"Pause = P", 13, (255, 255, 255))
-        window.blit(text, (SCREEN_WIDTH - 100, SCREEN_HEIGHT - 20))
+# Controls displayed on screen
+def p_for_pause(): # pause 
+        text = smallestfont.render(f"P: Pause", 13, (180, 180, 180))
+        window.blit(text, (3, SCREEN_HEIGHT - 103))
+        def w_for_forward(): # forward
+            text = smallestfont.render(f"W: Forward", 13, (180, 180, 180))
+            window.blit(text, (3, SCREEN_HEIGHT - 43))
+        def a_for_left(): # left
+            text = smallestfont.render(f"A: Left", 13, (180, 180, 180))
+            window.blit(text, (3, SCREEN_HEIGHT - 63))
+        def d_for_right(): # right
+            text = smallestfont.render(f"D: Right", 13, (180, 180, 180))
+            window.blit(text, (3, SCREEN_HEIGHT - 83))
+        def space_for_shoot(): # shoot
+            text = smallestfont.render(f"SPACE: Shoot", 13, (180, 180, 180))
+            window.blit(text, (3, SCREEN_HEIGHT - 23))
+        w_for_forward()
+        a_for_left()
+        d_for_right()
+        space_for_shoot()

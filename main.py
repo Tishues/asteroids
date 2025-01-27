@@ -88,13 +88,13 @@ def main():
     def current_score(): 
         text = smallfont.render(f"Score: {total_score}", 13, (255, 255, 255))
         screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, 3))
-        # current lives/armor displayed on screen while playing  
+        # current lives/shield displayed on screen while playing  
     def current_lives(): 
-        text = smallestfont.render(f"ARMOR: {player_lives}", 13, (0, 255, 0))
+        text = smallestfont.render(f"SHIELD: {player_lives}", 13, (0, 255, 0))
         screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, SCREEN_HEIGHT-23))
-        # armor/lives recharching displayed in screen
+        # shield/lives recharching displayed in screen
     def recharging_lives(): 
-        text = smallestfont.render(f"CHARGING {regain_lives_check}%", 13, (255, 0, 0))
+        text = smallestfont.render(f"CHARGING.. {regain_lives_check}%", 13, (255, 0, 0))
         screen.blit(text, (((SCREEN_WIDTH /2) - text.get_width() /2), SCREEN_HEIGHT-23))
 
 

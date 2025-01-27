@@ -1,3 +1,4 @@
+import pygame
 #Settings
 SCREEN_WIDTH = 900
 SCREEN_HEIGHT = 600
@@ -13,3 +14,4 @@ PLAYER_SPEED = 200
 PLAYER_SHOOT_SPEED = 500
 SHOT_RADIUS = 5
 PLAYER_SHOOT_COOLDOWN = 0.2
+PLAYER_IMAGE = pygame.image.load('images/asteroids_game_ship.png')

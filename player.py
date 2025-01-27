@@ -3,6 +3,14 @@ from constants import *
 from circleshape import CircleShape
 from shot import Shot
 
+upsidedown_player = pygame.transform.rotate(PLAYER_IMAGE, 180)
+person = pygame.transform.scale(upsidedown_player, (45,60))
+rotated_person = person
+def rotate_center(image, rect, angle):
+    rotate_image = pygame.transform.rotate(image, angle)
+    rotate_rect = rotate_image.get_rect(center=rect.center)
+    return rotate_image, rotate_rect
+
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
@@ -18,10 +26,15 @@ class Player(CircleShape):
         b = self.position - forward * self.radius - right
         c = self.position - forward * self.radius + right
         return [a, b, c]
+        
     
+
     # Drawing the triangle as the player
     def draw(self, screen):
-        pygame.draw.polygon(screen, "white", self.triangle(), 2)
+        oldRect = rotated_person.get_rect(center=(self.position.x, self.position.y))
+        screen.blit(rotated_person, (oldRect))
+        
+        #pygame.draw.polygon(screen, "white", self.triangle(), 2)
 
     # Used to rotate right or left with -
     def rotate(self, dt):
@@ -43,14 +56,18 @@ class Player(CircleShape):
 
     # Update method to overide parent class
     def update(self, dt):
+        global rotated_person
         self.shoot_timer -= dt
         keys = pygame.key.get_pressed()
+        rotate = 0
         
         # Move the character around the screen.
         if keys[pygame.K_a] or keys[pygame.K_LEFT]: # Rotating left
             self.rotate(-dt)
+            rotated_person = pygame.transform.rotate(person, -self.rotation)
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]: # Rotating right
             self.rotate(dt)
+            rotated_person = pygame.transform.rotate(person, -self.rotation)
         if keys[pygame.K_w] or keys[pygame.K_UP]: #Move forward
             self.move(dt)
         #if keys[pygame.K_s] or keys[pygame.K_DOWN]: # Removed reverse to make game more challenging.
@@ -65,6 +82,3 @@ class Player(CircleShape):
             self.position.y = SCREEN_HEIGHT
         if self.position.y > SCREEN_HEIGHT:
             self.position.y = 0
-
-        
-        

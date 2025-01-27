@@ -16,6 +16,7 @@ def main():
     dt = 0
     total_score = 0 # Total score tallying all asteroids shot.
     player_lives = 1 # Starting lives for player, displayed as ARMOR in game.
+    regain_lives_check = 0 # Used to check if the player has enough kills to regain a life.
     background = pygame.image.load("images/asteroids_background.jpg") #Background image.
 
         
@@ -120,6 +121,11 @@ def main():
                         asteroid.split()
                         shot.kill()
                         total_score += 1
+                        if regain_lives_check < 100: # regain 1 life per 100 kills
+                            regain_lives_check += 1
+                        if regain_lives_check >= 100:
+                            regain_lives_check = 0
+                            player_lives += 1                       
 
 
             pygame.Surface.fill(screen, (0,0,0))

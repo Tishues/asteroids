@@ -6,7 +6,7 @@ from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from shot import Shot
-from functions import smallfont, smallestfont, gameover_menu, pause_menu_labels, p_for_pause
+from functions import smallfont, smallestfont, gameover_menu, pause_menu_labels, p_for_pause, esc_for_menu
 
 def main():
     pygame.init() # Pygame Initialized.
@@ -21,6 +21,7 @@ def main():
 
         
     def pause_menu(): # Pause menu with conintue/restart/quit options.
+        p_for_pause()
         pause_menu_labels() # calling labels from functions.py
         text = smallfont.render('Paused', 13, (0, 0, 0))
         textx = SCREEN_WIDTH / 2 - text.get_width() / 2
@@ -138,7 +139,7 @@ def main():
             pygame.Surface.fill(screen, (0,0,0))
             screen.blit(background, (0, 0)) # Background image applied.
             current_score() # Displays score on screen while playing.
-            p_for_pause() # Displays controls for pause menu.
+            esc_for_menu() # Displays control for pause menu.
             if player_lives == 1:
                 current_lives() # Displays players current amount of lives left.
             if player_lives == 0:

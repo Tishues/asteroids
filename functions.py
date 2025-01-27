@@ -85,21 +85,26 @@ def pause_menu_labels():  # Lables for pause screen
 
 # Controls displayed on screen
 def p_for_pause(): # pause 
-        text = smallestfont.render(f"P: Pause", 13, (180, 180, 180))
-        window.blit(text, (3, SCREEN_HEIGHT - 103))
+        text = smallestfont.render(f"Menu", 13, (180, 180, 180))
+        window.blit(text, ((SCREEN_WIDTH /2) - text.get_width()/2, (SCREEN_HEIGHT /2)-210))
         def w_for_forward(): # forward
-            text = smallestfont.render(f"W: Forward", 13, (180, 180, 180))
-            window.blit(text, (3, SCREEN_HEIGHT - 43))
+            text = smallestfont.render(f"W: Thrust Forward", 13, (180, 180, 180))
+            window.blit(text, ((SCREEN_WIDTH /2) - text.get_width()/2, (SCREEN_HEIGHT /1.25)-25))
         def a_for_left(): # left
-            text = smallestfont.render(f"A: Left", 13, (180, 180, 180))
-            window.blit(text, (3, SCREEN_HEIGHT - 63))
+            text = smallestfont.render(f"A: Turn Left", 13, (180, 180, 180))
+            window.blit(text, ((SCREEN_WIDTH /2) - text.get_width()/2, (SCREEN_HEIGHT /1.25)-50))
         def d_for_right(): # right
-            text = smallestfont.render(f"D: Right", 13, (180, 180, 180))
-            window.blit(text, (3, SCREEN_HEIGHT - 83))
+            text = smallestfont.render(f"D: Turn Right", 13, (180, 180, 180))
+            window.blit(text, ((SCREEN_WIDTH /2) - text.get_width()/2, (SCREEN_HEIGHT /1.25)-75))
         def space_for_shoot(): # shoot
             text = smallestfont.render(f"SPACE: Shoot", 13, (180, 180, 180))
-            window.blit(text, (3, SCREEN_HEIGHT - 23))
+            window.blit(text, ((SCREEN_WIDTH /2) - text.get_width()/2, (SCREEN_HEIGHT /1.25)-100))
         w_for_forward()
         a_for_left()
         d_for_right()
         space_for_shoot()
+
+
+def esc_for_menu(): # shoot
+    text = smallestfont.render(f"ESC: Menu", 13, (180, 180, 180))
+    window.blit(text, (3, SCREEN_HEIGHT - 23))

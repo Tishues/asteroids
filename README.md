@@ -20,10 +20,8 @@ A python implementation of the classic Asteroids arcade game where the player pi
     python3 main.py
 
 ## Controls
-- W: Thrust forward
-- A: Rotate left
-- D: Rotate right
-- SPACE: Fire
 - P: Pause menu
-- Y: Yes
-- N: No/Quit program
+- W or ↑: Thrust forward
+- A or ←: Rotate left
+- D or →: Rotate right
+- SPACE: Fire

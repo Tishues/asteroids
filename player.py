@@ -10,7 +10,7 @@ class Player(CircleShape):
         self.rotation =  0
         self.shoot_timer = 0
         
-
+    # Defining the Triangle that will be drawn for the player
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
@@ -19,20 +19,20 @@ class Player(CircleShape):
         c = self.position - forward * self.radius + right
         return [a, b, c]
     
-
+    # Drawing the triangle as the player
     def draw(self, screen):
         pygame.draw.polygon(screen, "white", self.triangle(), 2)
 
-
+    # Used to rotate right or left with -
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
 
-
+    # Used to move forward or backward with -
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
         
-
+    # Playing shot direction, speed and cooldown.
     def shoot(self):
         if self.shoot_timer > 0:
             return
@@ -41,20 +41,20 @@ class Player(CircleShape):
         shot = Shot(self.position)
         shot.velocity = forward * PLAYER_SHOOT_SPEED
 
-
+    # Update method to overide parent class
     def update(self, dt):
         self.shoot_timer -= dt
         keys = pygame.key.get_pressed()
         
         # Move the character around the screen.
-        if keys[pygame.K_a]:
+        if keys[pygame.K_a] or keys[pygame.K_LEFT]: # Rotating left
             self.rotate(-dt)
-        if keys[pygame.K_d]:
+        if keys[pygame.K_d] or keys[pygame.K_RIGHT]: # Rotating right
             self.rotate(dt)
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] or keys[pygame.K_UP]: #Move forward
             self.move(dt)
-        #if keys[pygame.K_s]: #Removed reverse to make game more challenging.
-            #self.move(-dt) #Delete # from the start of the lines to add it back.
+        #if keys[pygame.K_s] or keys[pygame.K_DOWN]: # Removed reverse to make game more challenging.
+        #    self.move(-dt) # Delete # from the start of the lines to add it back.
 
         # Wrap around world for the player only.
         if self.position.x < 0:

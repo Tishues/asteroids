@@ -6,7 +6,7 @@ from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from shot import Shot
-from functions import smallfont, gameover_menu, pause_menu_labels, p_for_pause
+from functions import smallfont, smallestfont, gameover_menu, pause_menu_labels, p_for_pause
 
 def main():
     pygame.init() # Pygame Initialized.
@@ -15,6 +15,7 @@ def main():
     clock = pygame.time.Clock() # A clock for tickrate and timing.
     dt = 0
     total_score = 0 # Total score tallying all asteroids shot.
+    player_lives = 1 # Starting lives for player, displayed as ARMOR in game.
     background = pygame.image.load("images/asteroids_background.jpg") #Background image.
 
         
@@ -83,7 +84,10 @@ def main():
     def current_score(): 
         text = smallfont.render(f"Score: {total_score}", 13, (255, 255, 255))
         screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, 3))
-
+        # Score to be displayed on screen while playing.  
+    def current_lives(): 
+        text = smallestfont.render(f"ARMOR: {player_lives}", 13, (0, 255, 0))
+        screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, SCREEN_HEIGHT-23))
 
     # GAMELOOP
     while True: 
@@ -104,9 +108,12 @@ def main():
 
 
             for asteroid in asteroids.copy():
-                # Game Over, Score and Restart.
+                # Lose a life/armor for each asteroid you crash into, when dead GAME OVER menu.
                 if player.collisions(asteroid):
-                   gameover_menu()   
+                    asteroid.kill()
+                    player_lives -= 1
+                    if player_lives == -1:
+                        gameover_menu()   
                   
                 for shot in shots.copy(): # Splits asteroids into smaller asteroids and deletes the shot.
                     if asteroid.collisions(shot) or shot.collisions(asteroid):
@@ -118,6 +125,7 @@ def main():
             pygame.Surface.fill(screen, (0,0,0))
             screen.blit(background, (0, 0)) # Background image applied.
             current_score() # Displays score on screen while playing.
+            current_lives() # Displays players current amount of lives left.
             p_for_pause() # Displays controls for pause menu.
 
             for sprite in drawable:

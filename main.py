@@ -85,10 +85,15 @@ def main():
     def current_score(): 
         text = smallfont.render(f"Score: {total_score}", 13, (255, 255, 255))
         screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, 3))
-        # Score to be displayed on screen while playing.  
+        # current lives/armor displayed on screen while playing  
     def current_lives(): 
         text = smallestfont.render(f"ARMOR: {player_lives}", 13, (0, 255, 0))
         screen.blit(text, ((SCREEN_WIDTH /2) - text.get_width() /2, SCREEN_HEIGHT-23))
+        # armor/lives recharching displayed in screen
+    def recharging_lives(): 
+        text = smallestfont.render(f"CHARGING {regain_lives_check}%", 13, (255, 0, 0))
+        screen.blit(text, (((SCREEN_WIDTH /2) - text.get_width() /2), SCREEN_HEIGHT-23))
+
 
     # GAMELOOP
     while True: 
@@ -121,18 +126,23 @@ def main():
                         asteroid.split()
                         shot.kill()
                         total_score += 1
-                        if regain_lives_check < 100: # regain 1 life per 100 kills
-                            regain_lives_check += 1
-                        if regain_lives_check >= 100:
-                            regain_lives_check = 0
-                            player_lives += 1                       
+                        if player_lives == 0: # regain life only if lost life
+                            if regain_lives_check < 100: # regain 1 life per 100 kills
+                                regain_lives_check += 1
+                            if regain_lives_check >= 100:
+                                regain_lives_check = 0
+                                if player_lives == 0:
+                                    player_lives += 1
 
 
             pygame.Surface.fill(screen, (0,0,0))
             screen.blit(background, (0, 0)) # Background image applied.
             current_score() # Displays score on screen while playing.
-            current_lives() # Displays players current amount of lives left.
             p_for_pause() # Displays controls for pause menu.
+            if player_lives == 1:
+                current_lives() # Displays players current amount of lives left.
+            if player_lives == 0:
+                recharging_lives() # Displays how many kills until armor is recharged.
 
             for sprite in drawable:
                 sprite.draw(screen)  # Drawing ALL drawable objects.

@@ -4,7 +4,7 @@ from sys import exit
 from constants import *
 from player import Player
 from asteroidfield import AsteroidField
-from asteroid import Asteroid
+from asteroid import Asteroid, AsteroidMedium, AsteroidSmall
 from shot import Shot
 from functions import smallfont, smallestfont, gameover_menu, pause_menu_labels, p_for_pause, esc_for_menu
 
@@ -75,6 +75,8 @@ def main():
     # Adding objects to sprite groups.
     Player.containers = (updatable, drawable)
     Asteroid.containers = (updatable, drawable, asteroids)
+    AsteroidMedium.containers = (updatable, drawable, asteroids)
+    AsteroidSmall.containers = (updatable, drawable, asteroids)
     AsteroidField.containers = (updatable,)
     Shot.containers = (updatable, drawable, shots)
 
